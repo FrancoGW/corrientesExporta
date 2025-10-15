@@ -5,42 +5,37 @@ import Image from 'next/image';
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  
-  // Array de imágenes del slider
+
   const sliderImages = [
     {
       id: 1,
-      src: '/Asssets/slider1.png',
-      alt: 'Exportación de productos correntinos',
-      title: 'Conectamos Corrientes con el mundo'
+      src: '/Asssets/slider1.png', // Imagen de agricultura
+      alt: 'Agricultor trabajando en el campo',
+      title: 'ARGENTINA EXPORTA',
+      subtitle: 'CONOCÉ NUESTROS PROGRAMAS',
+      description: 'Impulsa las exportaciones de pymes y emprendedores mediante financiamiento, asesoramiento, simplificación de trámites y conexión con mercados internacionales a través de la plataforma exportargentina, promoviendo la competitividad y diversificación comercial.',
+      ctaText: 'CONOCÉ MÁS'
     },
     {
       id: 2,
-      src: '/Asssets/logo.png', // Placeholder para las otras imágenes
-      alt: 'Yerba mate premium',
-      title: 'Yerba mate de calidad internacional'
+      src: '/Asssets/slider1.png',
+      alt: 'Imagen del slider 2',
+      title: 'ARGENTINA EXPORTA',
+      subtitle: 'CONOCÉ NUESTROS PROGRAMAS',
+      description: 'Impulsa las exportaciones de pymes y emprendedores mediante financiamiento, asesoramiento, simplificación de trámites y conexión con mercados internacionales a través de la plataforma exportargentina, promoviendo la competitividad y diversificación comercial.',
+      ctaText: 'CONOCÉ MÁS'
     },
     {
       id: 3,
-      src: '/Asssets/logo.png', // Placeholder para las otras imágenes
-      alt: 'Cítricos frescos',
-      title: 'Cítricos frescos para exportación'
-    },
-    {
-      id: 4,
-      src: '/Asssets/logo.png', // Placeholder para las otras imágenes
-      alt: 'Arroz orgánico',
-      title: 'Arroz orgánico certificado'
-    },
-    {
-      id: 5,
-      src: '/Asssets/logo.png', // Placeholder para las otras imágenes
-      alt: 'Maderas nobles',
-      title: 'Maderas nobles sostenibles'
+      src: '/Asssets/slider1.png',
+      alt: 'Imagen del slider 3',
+      title: 'ARGENTINA EXPORTA',
+      subtitle: 'CONOCÉ NUESTROS PROGRAMAS',
+      description: 'Impulsa las exportaciones de pymes y emprendedores mediante financiamiento, asesoramiento, simplificación de trámites y conexión con mercados internacionales a través de la plataforma exportargentina, promoviendo la competitividad y diversificación comercial.',
+      ctaText: 'CONOCÉ MÁS'
     }
   ];
 
-  // Auto-slide cada 5 segundos
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % sliderImages.length);
@@ -57,119 +52,109 @@ export default function Hero() {
     setCurrentSlide((prev) => (prev - 1 + sliderImages.length) % sliderImages.length);
   };
 
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+  };
+
+  const currentImage = sliderImages[currentSlide];
+
   return (
-    <section id="inicio" className="pt-32 min-h-screen relative overflow-hidden">
-      {/* Slider Background */}
+    <section className="relative h-screen overflow-hidden pt-20">
+      {/* Background Image - Right Side */}
       <div className="absolute inset-0 z-0">
-        {sliderImages.map((image, index) => (
-          <div
-            key={image.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              fill
-              className="object-cover"
-              priority={index === 0}
-            />
-            {/* Overlay para mejorar legibilidad del texto */}
-            <div className="absolute inset-0 bg-black/30"></div>
-          </div>
-        ))}
+        <Image
+          src={currentImage.src}
+          alt={currentImage.alt}
+          fill
+          className="object-cover object-center w-full h-full"
+          sizes="100vw"
+          priority
+        />
       </div>
 
-      {/* Side Arrows */}
+      {/* Green Diagonal Overlay - Left Side */}
+      <div className="absolute inset-0 z-10">
+        {/* Green diagonal shape */}
+        <div 
+          className="absolute top-0 left-0 w-full h-full"
+          style={{
+            background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%)',
+            clipPath: 'polygon(0 0, 65% 0, 45% 100%, 0 100%)'
+          }}
+        ></div>
+      </div>
+
+      {/* Content - Left Side */}
+      <div className="relative z-20 h-full flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="max-w-2xl">
+            {/* Logo */}
+            <div className="mb-8">
+              <Image
+                src="/Asssets/logo - Corrientes Exporta - fondo transparente 2.svg"
+                alt="Corrientes Exporta"
+                width={300}
+                height={80}
+                className="h-16 w-auto object-contain"
+              />
+            </div>
+
+            {/* Subtitle */}
+            <p className="text-white text-sm uppercase tracking-wider mb-6 font-medium">
+              {currentImage.subtitle}
+            </p>
+
+            {/* Main Title */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight uppercase">
+              {currentImage.title}
+            </h1>
+
+            {/* Description */}
+            <p className="text-white text-lg leading-relaxed mb-10 max-w-xl">
+              {currentImage.description}
+            </p>
+
+            {/* CTA Button */}
+            <button 
+              className="bg-white text-green-600 px-8 py-4 rounded-lg font-bold text-lg uppercase tracking-wide hover:bg-gray-100 transition-colors duration-300"
+            >
+              {currentImage.ctaText}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/70 transition-all duration-300"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
       >
         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
       </button>
-
+      
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/70 transition-all duration-300"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-30 w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-colors"
       >
         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </button>
 
-      {/* Content Overlay */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[70vh]">
-          {/* Left Content */}
-          <div className="space-y-8 text-white">
-            {/* Logo */}
-            <div className="flex items-center">
-              <Image
-                src="/Asssets/logoSlider.svg"
-                alt="Corrientes Exporta"
-                width={200}
-                height={80}
-                className="h-16 sm:h-20 lg:h-24 w-auto object-contain"
-              />
-            </div>
-
-            {/* Subtitle */}
-            <div className="text-lg font-medium text-green-200">
-              EXPORTACIÓN DE CALIDAD
-            </div>
-
-            {/* Main Title */}
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-              Conectamos{' '}
-              <span className="text-green-300">Corrientes</span>{' '}
-              con el mundo
-            </h1>
-            
-            {/* Description */}
-            <p className="text-xl leading-relaxed opacity-90 max-w-lg">
-              Somos especialistas en la exportación de productos locales de Corrientes, 
-              conectando la riqueza de nuestra región con mercados internacionales de manera sostenible y eficiente.
-            </p>
-
-            {/* CTA Button */}
-            <div className="pt-4">
-              <button className="bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors shadow-lg">
-                CONOCE MÁS
-              </button>
-            </div>
-          </div>
-        </div>
+      {/* Dots Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex space-x-3">
+        {sliderImages.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+              index === currentSlide ? 'bg-white' : 'bg-white/50'
+            }`}
+          />
+        ))}
       </div>
-
-      {/* Bottom Controls */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center space-x-4">
-        {/* Slide Counter */}
-        <div className="text-white text-sm opacity-75 bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full">
-          {String(currentSlide + 1).padStart(2, '0')} / {String(sliderImages.length).padStart(2, '0')}
-        </div>
-        
-        {/* Slide Indicators */}
-        <div className="flex space-x-2">
-          {sliderImages.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentSlide 
-                  ? 'bg-white scale-125' 
-                  : 'bg-white/50 hover:bg-white/75'
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Bottom Gradient Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent z-20"></div>
     </section>
   );
 }
-
