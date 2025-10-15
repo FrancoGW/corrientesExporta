@@ -58,6 +58,11 @@ export default function Hero() {
 
   const currentImage = sliderImages[currentSlide];
 
+  // Verificación de seguridad
+  if (!currentImage) {
+    return null;
+  }
+
   return (
     <section className="relative h-screen overflow-hidden pt-20">
       {/* Background Image - Right Side */}
