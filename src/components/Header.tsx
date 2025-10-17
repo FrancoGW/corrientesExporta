@@ -19,7 +19,7 @@ export default function Header() {
               </svg>
               <span className="truncate">YRIGOYEN 2289, CORRIENTES CAPITAL, CP 3400</span>
             </div>
-            
+             
             {/* Phone */}
             <div className="flex items-center text-gray-600">
               <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 text-green-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
