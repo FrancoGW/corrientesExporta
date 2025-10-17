@@ -2,14 +2,14 @@ import Image from 'next/image';
 
 export default function AboutSection() {
   return (
-    <section className="relative py-20 overflow-hidden bg-black">
+    <section className="relative py-20 overflow-hidden">
       {/* Background Image - Full Width */}
-      <div className="relative w-full h-full z-0">
+      <div className="absolute inset-0 z-0">
         <Image
           src="/Asssets/descripcion.png"
           alt="Fondo industrial"
           fill
-          className="object-cover object-center w-full h-full"
+          className="object-cover object-center"
           sizes="100vw"
           priority
         />

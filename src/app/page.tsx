@@ -1,9 +1,14 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import AboutSection from '@/components/AboutSection';
-import ServicesSection from '@/components/ServicesSection';
-import Products from '@/components/Products';
-import Services from '@/components/Services';
+import ObjectiveSection from '@/components/ObjectiveSection';
+import CollaborationSection from '@/components/CollaborationSection';
+import ServicesCarousel from '@/components/ServicesCarousel';
+import VideosSection from '@/components/VideosSection';
+import TeamSection from '@/components/TeamSection';
+import StrategicAlliesSection from '@/components/StrategicAlliesSection';
+import ContactSection from '@/components/ContactSection';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
@@ -11,9 +16,14 @@ export default function Home() {
       <Header />
       <Hero />
       <AboutSection />
-      <ServicesSection />
-      <Services />
-      <Products />
+      <ObjectiveSection />
+      <CollaborationSection />
+      <ServicesCarousel />
+      <VideosSection />
+      <TeamSection />
+      <StrategicAlliesSection />
+      <ContactSection />
+      <Footer />
     </div>
   );
 }
